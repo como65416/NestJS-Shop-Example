@@ -3,14 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from 'src/controllers';
 import { LoginMiddleware } from 'src/middlewares';
 import { JWTService, UsersService } from 'src/services';
-import { UserEntity } from '../entities/user.entity';
 import { UserRepository } from '../repositories/user.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
-  providers: [UserRepository, UsersService, JWTService],
+  imports: [TypeOrmModule.forFeature([UserRepository])],
+  providers: [UsersService, JWTService],
   controllers: [UserController],
-  exports: [UserRepository, UsersService, JWTService],
+  exports: [UsersService, JWTService],
 })
 export class UserModule {
   configure(consumer: MiddlewareConsumer) {
