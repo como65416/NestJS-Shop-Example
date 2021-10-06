@@ -4,6 +4,7 @@ import { CryptService, JWTService, UsersService } from './services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from './entities';
+import { UserRepository } from './repositories/user.repository';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { UserEntity } from './entities';
     TypeOrmModule.forFeature([UserEntity]),
   ],
   controllers: [AuthController],
-  providers: [CryptService, JWTService, UsersService],
+  providers: [CryptService, JWTService, UsersService, UserRepository],
 })
 export class AppModule {}
