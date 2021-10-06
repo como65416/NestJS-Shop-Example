@@ -1,18 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './controllers';
-import { CryptService, JWTService, UsersService } from './services';
+import { CryptService, JWTService } from './services';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserEntity } from './entities';
-import { UserRepository } from './repositories/user.repository';
+import { UserModule } from './modules/user.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(),
-    ConfigModule.forRoot(),
-    TypeOrmModule.forFeature([UserEntity]),
-  ],
+  imports: [TypeOrmModule.forRoot(), ConfigModule.forRoot(), UserModule],
   controllers: [AuthController],
-  providers: [CryptService, JWTService, UsersService, UserRepository],
+  providers: [CryptService, JWTService],
 })
 export class AppModule {}
