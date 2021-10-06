@@ -1,13 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './controllers';
-import { CryptService, JWTService } from './services';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './modules/user.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthController } from './controllers';
+import { CommonModule, UserModule } from './modules';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), ConfigModule.forRoot(), UserModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    ConfigModule.forRoot(),
+    CommonModule,
+    UserModule,
+  ],
   controllers: [AuthController],
-  providers: [CryptService, JWTService],
+  providers: [],
+  exports: [],
 })
 export class AppModule {}

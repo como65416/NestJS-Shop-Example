@@ -8,4 +8,8 @@ export class UsersService {
   async findByUsername(username: string) {
     return await this.usersRepository.findByUsername(username);
   }
+
+  async findById(id: number) {
+    return await this.usersRepository.findOneById(id);
+  }
 }

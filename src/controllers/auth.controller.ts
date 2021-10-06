@@ -30,7 +30,11 @@ export class AuthController {
     }
 
     return {
-      token: this.jwtService.generateToken(username, 'member'),
+      token: this.jwtService.generateToken({
+        userId: user.id,
+        username: username,
+        role: user.role,
+      }),
     };
   }
 }

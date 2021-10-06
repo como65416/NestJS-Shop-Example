@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import { TokenPayload } from 'src/dtos';
 
 @Injectable()
 export class JWTService {
-  generateToken(username: string, role: string): string {
+  generateToken(payload: TokenPayload): string {
     const privateKey = process.env.JWT_KEY;
 
-    return jwt.sign({ username, role }, privateKey, { algorithm: 'HS256' });
+    return jwt.sign(payload, privateKey, {
+      algorithm: 'HS256',
+    });
+  }
+
+  getTokenData(token: string): TokenPayload {
+    const privateKey = process.env.JWT_KEY;
+    const payload = jwt.verify(token, privateKey);
+
+    return {
+      userId: payload.userId,
+      username: payload.username,
+      role: payload.role,
+    };
   }
 }
