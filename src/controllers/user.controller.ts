@@ -6,13 +6,16 @@ import {
   Put,
   Response,
 } from '@nestjs/common';
-import { UpdateProfileRequest } from 'src/dtos/requests';
+import { UpdatePasswordRequest, UpdateProfileRequest } from 'src/dtos/requests';
 import { ProfileResponse } from 'src/dtos/response/profile-response';
-import { UsersService } from '../services';
+import { CryptService, UsersService } from '../services';
 
 @Controller()
 export class UserController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private cryptService: CryptService,
+  ) {}
 
   @Get('/profile')
   async profile(@Response() res): Promise<ProfileResponse> {
@@ -34,6 +37,18 @@ export class UserController {
     await this.usersService.updateUserProfile(userId, {
       name: req.name,
       email: req.email,
+    });
+
+    return res.status(HttpStatus.NO_CONTENT).send('');
+  }
+
+  @Put('/update-password')
+  async updatePassword(@Body() req: UpdatePasswordRequest, @Response() res) {
+    const userId = res.locals.userId;
+
+    const hashPassword = await this.cryptService.hashPassword(req.password);
+    await this.usersService.updateUserProfile(userId, {
+      password: hashPassword,
     });
 
     return res.status(HttpStatus.NO_CONTENT).send('');
