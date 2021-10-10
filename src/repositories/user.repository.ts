@@ -16,4 +16,8 @@ export class UserRepository extends BaseAbstractRepository<UserEntity> {
       .where('id = :userId', { userId })
       .execute();
   }
+
+  async createUser(user: UserEntity) {
+    return await this.save(user);
+  }
 }

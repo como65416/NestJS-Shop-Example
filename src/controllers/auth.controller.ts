@@ -1,5 +1,6 @@
 import {
   Controller,
+  Response,
   Post,
   Body,
   HttpException,
@@ -8,6 +9,7 @@ import {
 import { CryptService, JWTService, UsersService } from '../services';
 import { LoginRequest } from '../dtos/requests';
 import { LoginResponse } from '../dtos/response';
+import { RegisterRequest } from 'src/dtos/requests/register-request';
 
 @Controller()
 export class AuthController {
@@ -37,5 +39,23 @@ export class AuthController {
         role: user.role,
       }),
     };
+  }
+
+  @Post('/register')
+  async register(@Body() req: RegisterRequest, @Response() res) {
+    const user = await this.usersService.findByUsername(req.username);
+    if (user != undefined) {
+      throw new HttpException('Account exists already', HttpStatus.BAD_REQUEST);
+    }
+
+    const hashPassword = await this.cryptService.hashPassword(req.password);
+    await this.usersService.createUser({
+      username: req.username,
+      password: hashPassword,
+      name: req.name,
+      email: req.email,
+    });
+
+    return res.status(HttpStatus.NO_CONTENT).send('');
   }
 }
