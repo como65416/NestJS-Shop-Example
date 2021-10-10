@@ -1,6 +1,12 @@
 import { DeleteResult, Repository } from 'typeorm';
 
 export abstract class BaseAbstractRepository<T> extends Repository<T> {
+  public async findOneByIdForUpdate(id: number): Promise<T> {
+    return await this.findOne(id, {
+      lock: { mode: 'pessimistic_write' },
+    });
+  }
+
   public async findOneById(id: number): Promise<T> {
     return await this.findOne(id);
   }
