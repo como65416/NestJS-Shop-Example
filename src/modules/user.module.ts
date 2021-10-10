@@ -13,6 +13,6 @@ import { UserRepository } from '../repositories/user.repository';
 })
 export class UserModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoginMiddleware).forRoutes('profile');
+    consumer.apply(LoginMiddleware).forRoutes('profile', 'update-password');
   }
 }
