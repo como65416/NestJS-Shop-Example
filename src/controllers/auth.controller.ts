@@ -6,7 +6,8 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CryptService, JWTService, UsersService } from '../services';
-import { LoginRequest, LoginResponse } from '../dtos/';
+import { LoginRequest } from '../dtos/requests';
+import { LoginResponse } from '../dtos/response';
 
 @Controller()
 export class AuthController {

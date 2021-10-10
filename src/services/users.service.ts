@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { UserRepository } from 'src/repositories/user.repository';
+import { UpdateUserData } from 'src/dtos/data';
 
 @Injectable()
 export class UsersService {
@@ -17,10 +18,13 @@ export class UsersService {
     return await this.usersRepository.findOneById(id);
   }
 
-  async updateUserNickname(userId: number, name: string) {
+  async updateUserProfile(userId: number, profile: UpdateUserData) {
     return await this.connection.transaction(async (entityManager) => {
       const usersRepository = entityManager.getCustomRepository(UserRepository);
-      await usersRepository.updateNameById(userId, name);
+      await usersRepository.updateUser(userId, {
+        name: profile.name,
+        email: profile.email,
+      });
     });
   }
 }

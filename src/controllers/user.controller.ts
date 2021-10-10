@@ -1,12 +1,13 @@
 import {
+  Body,
   Controller,
   Get,
   HttpStatus,
   Put,
-  Request,
   Response,
 } from '@nestjs/common';
-import { ProfileResponse } from 'src/dtos/profile-response';
+import { UpdateProfileRequest } from 'src/dtos/requests';
+import { ProfileResponse } from 'src/dtos/response/profile-response';
 import { UsersService } from '../services';
 
 @Controller()
@@ -20,14 +21,20 @@ export class UserController {
 
     return res.send({
       name: user.name,
+      email: user.email,
     } as ProfileResponse);
   }
 
   @Put('/profile')
-  async updateProfile(@Request() req, @Response() res): Promise<any> {
+  async updateProfile(
+    @Body() req: UpdateProfileRequest,
+    @Response() res,
+  ): Promise<any> {
     const userId = res.locals.userId;
-    const name = req.body.name;
-    await this.usersService.updateUserNickname(userId, name);
+    await this.usersService.updateUserProfile(userId, {
+      name: req.name,
+      email: req.email,
+    });
 
     return res.status(HttpStatus.NO_CONTENT).send('');
   }

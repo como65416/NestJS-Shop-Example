@@ -1,3 +1,4 @@
+import { UpdateUserData } from 'src/dtos/data';
 import { EntityRepository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { BaseAbstractRepository } from './base/base.abstract.repository';
@@ -8,10 +9,10 @@ export class UserRepository extends BaseAbstractRepository<UserEntity> {
     return await this.findOne({ username });
   }
 
-  async updateNameById(userId: number, name: string) {
+  async updateUser(userId: number, data: UpdateUserData) {
     return await this.createQueryBuilder()
       .update(UserEntity)
-      .set({ name })
+      .set(data)
       .where('id = :userId', { userId })
       .execute();
   }
