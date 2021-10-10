@@ -6,6 +6,7 @@
 
 包含：
 - RESTFul API
+- Validation
 - JWT 驗證 (Middleware)
 - Custom Reposity
 - Entity, DTO
