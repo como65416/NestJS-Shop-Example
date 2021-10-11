@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './controllers';
-import { CommonModule, UserModule } from './modules';
+import { CommonModule, UserModule, ProductModule } from './modules';
 
 @Module({
   imports: [
@@ -10,6 +10,7 @@ import { CommonModule, UserModule } from './modules';
     ConfigModule.forRoot(),
     CommonModule,
     UserModule,
+    ProductModule,
   ],
   controllers: [AuthController],
   providers: [],

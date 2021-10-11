@@ -1,3 +1,4 @@
 import { UserRole } from './user-role';
+import { ProductType } from './product-type';
 
-export { UserRole };
+export { ProductType, UserRole };
