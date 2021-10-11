@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { ProductRepository } from 'src/repositories/product.repository';
-import { ProductEntity } from 'src/entities';
 import { ProductType } from 'src/enum';
 import { ProductListData } from 'src/dtos/data';
 
@@ -20,6 +19,23 @@ export class ProductsService {
       keyword,
       page,
       ProductType.Normal,
+    );
+
+    return products.map((p) => ({
+      id: p.id,
+      name: p.name,
+      price: p.price,
+    }));
+  }
+
+  async searchVIPProducts(
+    keyword: string,
+    page: number,
+  ): Promise<ProductListData[]> {
+    const products = await this.productRepository.searchProducts(
+      keyword,
+      page,
+      ProductType.VIPOnly,
     );
 
     return products.map((p) => ({
