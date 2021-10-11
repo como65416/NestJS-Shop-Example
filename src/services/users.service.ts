@@ -41,4 +41,13 @@ export class UsersService {
       });
     });
   }
+
+  async updatePassword(userId: number, password: string) {
+    return await this.connection.transaction(async (entityManager) => {
+      const usersRepository = entityManager.getCustomRepository(UserRepository);
+      await usersRepository.updateUser(userId, {
+        password,
+      });
+    });
+  }
 }

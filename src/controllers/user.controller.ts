@@ -47,9 +47,7 @@ export class UserController {
     const userId = res.locals.userId;
 
     const hashPassword = await this.cryptService.hashPassword(req.password);
-    await this.usersService.updateUserProfile(userId, {
-      password: hashPassword,
-    });
+    await this.usersService.updatePassword(userId, hashPassword);
 
     return res.status(HttpStatus.NO_CONTENT).send('');
   }
