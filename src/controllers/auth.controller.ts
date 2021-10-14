@@ -7,9 +7,8 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CryptService, JWTService, UsersService } from '../services';
-import { LoginRequest } from '../dtos/requests';
+import { LoginRequest, RegisterRequest } from '../dtos/requests';
 import { LoginResponse } from '../dtos/response';
-import { RegisterRequest } from 'src/dtos/requests/register-request';
 
 @Controller()
 export class AuthController {
