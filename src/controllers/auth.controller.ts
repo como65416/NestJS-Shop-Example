@@ -48,10 +48,9 @@ export class AuthController {
       throw new HttpException('Account exists already', HttpStatus.BAD_REQUEST);
     }
 
-    const hashPassword = await this.cryptService.hashPassword(req.password);
     await this.usersService.createUser({
       username: req.username,
-      password: hashPassword,
+      password: req.password,
       name: req.name,
       email: req.email,
     });

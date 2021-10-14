@@ -3,6 +3,7 @@ import { Connection } from 'typeorm';
 import { UserRepository } from 'src/repositories/user.repository';
 import { CreateUserData, UpdateUserData } from 'src/dtos/data';
 import { UserRole } from 'src/enum';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -21,10 +22,12 @@ export class UsersService {
 
   async createUser(data: CreateUserData) {
     return await this.connection.transaction(async (entityManager) => {
+      const hashPassword = await bcrypt.hash(data.password, 10);
+
       const usersRepository = entityManager.getCustomRepository(UserRepository);
       await usersRepository.createUser({
         username: data.username,
-        password: data.password,
+        password: hashPassword,
         name: data.name,
         email: data.email,
         role: UserRole.Member,
@@ -43,10 +46,11 @@ export class UsersService {
   }
 
   async updatePassword(userId: number, password: string) {
+    const hashPassword = await bcrypt.hash(password, 10);
     return await this.connection.transaction(async (entityManager) => {
       const usersRepository = entityManager.getCustomRepository(UserRepository);
       await usersRepository.updateUser(userId, {
-        password,
+        password: hashPassword,
       });
     });
   }

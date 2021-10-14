@@ -45,9 +45,7 @@ export class UserController {
   @Put('/update-password')
   async updatePassword(@Body() req: UpdatePasswordRequest, @Response() res) {
     const userId = res.locals.userId;
-
-    const hashPassword = await this.cryptService.hashPassword(req.password);
-    await this.usersService.updatePassword(userId, hashPassword);
+    await this.usersService.updatePassword(userId, req.password);
 
     return res.status(HttpStatus.NO_CONTENT).send('');
   }
