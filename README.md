@@ -8,5 +8,6 @@
 - RESTFul API
 - Validation
 - JWT 驗證 (Middleware)
+- Guards (Role 檢查)
 - Custom Reposity
 - Entity, DTO
