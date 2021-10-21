@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `shop`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `shop` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `shop`;
+
+--
 -- Table structure for table `order_product`
 --
 
@@ -50,12 +58,13 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
+  `type` enum('Normal','VIPOnly') NOT NULL DEFAULT 'Normal',
   `price` float NOT NULL,
   `remaining_amount` int(10) unsigned NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +73,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'菜包',20,120,'2021-09-28 23:20:20','2021-09-28 23:20:20'),(2,'肉包',25,140,'2021-09-28 23:20:20','2021-09-28 23:20:20'),(3,'筍包',20,110,'2021-09-28 23:20:20','2021-09-28 23:20:20');
+INSERT INTO `product` VALUES (1,'菜包','Normal',20,120,'2021-09-28 23:20:20','2021-09-28 23:20:20'),(2,'肉包','Normal',25,140,'2021-09-28 23:20:20','2021-09-28 23:20:20'),(3,'筍包','Normal',20,110,'2021-09-28 23:20:20','2021-09-28 23:20:20'),(4,'黃金開口笑','VIPOnly',999,10,'2021-10-08 23:20:20','2021-10-08 23:20:20');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,9 +89,14 @@ CREATE TABLE `user` (
   `username` varchar(40) NOT NULL,
   `password` varchar(300) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `role` varchar(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `role` enum('Member','VIPMember') NOT NULL DEFAULT 'Member',
+  `email` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_username` (`username`),
+  KEY `idx_email` (`email`(30))
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +105,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'bob','$2a$10$fuFsani0EqZbqq2WDhoV.OEU/jrcQXiQF0wPKwk/2Gz62IvuVn4/i','Bob','Member'),(2,'alice','$2a$10$fuFsani0EqZbqq2WDhoV.OEU/jrcQXiQF0wPKwk/2Gz62IvuVn4/i','Alice','VIP Member');
+INSERT INTO `user` VALUES (1,'bob','$2a$10$1wJ8fhzM8nzlLZwCLkubAOjwTlmQBzogNjfFApjD4m1MPAafW4M7y','Bob','Member','bob@example.com','2021-06-03 12:35:45','2021-10-11 01:26:02'),(2,'alice','$2b$10$2TJKwKWEx119EJu8P9.f.e1Ww8ojTh4IggrqNu0uAnyRHPM5qM6T6','Alice','VIPMember','alice@example.com','2021-06-03 12:35:45','2021-10-11 15:18:51'),(33,'jack0001','$2b$10$XwpuqdTDlS/swztPE7M.2uVej.TsdbSizk25.kXkXfEA9qQNLHF4m','Jack','Member','jack0001@example.com','2021-10-14 23:54:36','2021-10-14 23:54:50');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,4 +147,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-08  8:26:31
+-- Dump completed on 2021-10-21 22:04:24
