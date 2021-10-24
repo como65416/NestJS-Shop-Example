@@ -7,7 +7,6 @@ export class RoleGuard implements CanActivate {
   roles: UserRole[];
 
   constructor(roles: UserRole[]) {
-    console.log(roles);
     this.roles = roles;
   }
 
