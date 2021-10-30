@@ -20,14 +20,30 @@
 
 ## 使用方法
 
+前置準備
+
 step 1. 匯入資料庫
 
 step 2. 更新資料庫連線設定 `ormconfig.json`
 
-step 3. 啟動
+step 3. 安裝套件
 
 ```sh
 npm ci
+```
+
+### 開發
+
+```sh
 npm run start:dev
 ```
+
+### Build 與 Run as Production
+
+```sh
+npm run build
+node --enable-source-maps dist/main.js
+```
+
+
 
