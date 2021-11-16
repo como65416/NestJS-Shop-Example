@@ -1,6 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import * as request from 'supertest';
+import { ProductEntity, UserEntity } from '../src/entities';
 import { AppModule } from './../src/app.module';
 
 describe('AppController (e2e)', () => {
@@ -8,7 +10,17 @@ describe('AppController (e2e)', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'sqlite',
+          database: ':memory:',
+          dropSchema: true,
+          entities: [UserEntity, ProductEntity],
+          synchronize: true,
+        }),
+        TypeOrmModule.forFeature([UserEntity, ProductEntity]),
+        AppModule,
+      ],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -17,8 +29,8 @@ describe('AppController (e2e)', () => {
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/products')
       .expect(200)
-      .expect('Hello World!');
+      .expect({ products: [] });
   });
 });
