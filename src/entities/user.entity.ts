@@ -1,11 +1,11 @@
-import { UserRole } from 'src/enum';
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from 'typeorm';
+import { UserRole } from '../enum';
 
 @Entity('user')
 export class UserEntity {

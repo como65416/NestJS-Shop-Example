@@ -3,11 +3,11 @@ import {
   DefaultValuePipe,
   Get,
   Query,
-  UseGuards,
+  UseGuards
 } from '@nestjs/common';
-import { SearchProductResponse } from 'src/dtos/response';
-import { UserRole } from 'src/enum';
-import { RoleGuard } from 'src/guards';
+import { SearchProductResponse } from '../dtos/response';
+import { UserRole } from '../enum';
+import { RoleGuard } from '../guards';
 import { ProductsService } from '../services';
 
 @Controller()

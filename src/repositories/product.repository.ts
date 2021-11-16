@@ -1,6 +1,6 @@
-import { ProductEntity } from 'src/entities';
-import { ProductType } from 'src/enum';
 import { EntityRepository } from 'typeorm';
+import { ProductEntity } from '../entities';
+import { ProductType } from '../enum';
 import { BaseAbstractRepository } from './base/base.abstract.repository';
 
 @EntityRepository(ProductEntity)

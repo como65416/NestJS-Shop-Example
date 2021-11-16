@@ -1,11 +1,11 @@
-import { ProductType } from 'src/enum';
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
   CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from 'typeorm';
+import { ProductType } from '../enum';
 
 @Entity('product')
 export class ProductEntity {

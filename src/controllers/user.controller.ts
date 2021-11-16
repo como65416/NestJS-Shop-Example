@@ -4,10 +4,10 @@ import {
   Get,
   HttpStatus,
   Put,
-  Response,
+  Response
 } from '@nestjs/common';
-import { UpdatePasswordRequest, UpdateProfileRequest } from 'src/dtos/requests';
-import { ProfileResponse } from 'src/dtos/response/profile-response';
+import { UpdatePasswordRequest, UpdateProfileRequest } from '../dtos/requests';
+import { ProfileResponse } from '../dtos/response/profile-response';
 import { CryptService, UsersService } from '../services';
 
 @Controller()

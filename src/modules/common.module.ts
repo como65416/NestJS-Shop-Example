@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CryptService, JWTService } from 'src/services';
+import { CryptService, JWTService } from '../services';
 
 @Module({
   imports: [],

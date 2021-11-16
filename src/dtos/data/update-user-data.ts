@@ -1,4 +1,4 @@
-import { UserRole } from 'src/enum';
+import { UserRole } from '../../enum';
 
 export class UpdateUserData {
   name?: string;

@@ -1,9 +1,9 @@
-import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserController } from 'src/controllers';
-import { LoginMiddleware } from 'src/middlewares';
-import { CryptService, JWTService, UsersService } from 'src/services';
+import { UserController } from '../controllers';
+import { LoginMiddleware } from '../middlewares';
 import { UserRepository } from '../repositories/user.repository';
+import { CryptService, JWTService, UsersService } from '../services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],
