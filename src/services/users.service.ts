@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Connection } from 'typeorm';
-import { UserRepository } from 'src/repositories/user.repository';
+import * as bcrypt from 'bcrypt';
 import { CreateUserData, UpdateUserData } from 'src/dtos/data';
 import { UserRole } from 'src/enum';
-import * as bcrypt from 'bcrypt';
+import { UserRepository } from 'src/repositories';
+import { Connection } from 'typeorm';
 
 @Injectable()
 export class UsersService {

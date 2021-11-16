@@ -1,8 +1,8 @@
-import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductController } from 'src/controllers/product.controller';
 import { LoginMiddleware } from 'src/middlewares';
-import { ProductRepository } from 'src/repositories/product.repository';
+import { ProductRepository } from 'src/repositories';
 import { JWTService, ProductsService } from 'src/services';
 
 @Module({
