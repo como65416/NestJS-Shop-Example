@@ -8,8 +8,8 @@
 - RESTFul API
 - Validation
 - JWT 驗證 (Middleware)
-- Guards (Role 檢查)
-- Custom Reposity
+- Guards (Role Check)
+- Custom Repository
 - Entity, DTO
 
 ## 所需環境
@@ -44,6 +44,3 @@ npm run start:dev
 npm run build
 node --enable-source-maps dist/main.js
 ```
-
-
-
