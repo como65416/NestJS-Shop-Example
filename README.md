@@ -11,6 +11,7 @@
 - Guards (Role Check)
 - Custom Repository
 - Entity, DTO
+- E2E 測試 (使用 SQLite)
 
 ## 所需環境
 
