@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { ProductEntity, UserEntity } from '../src/entities';
-import { ProductType } from '../src/enum';
 import { ProductRepository } from '../src/repositories';
+import { ProductSeed } from './seeds';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -33,32 +33,7 @@ describe('AppController (e2e)', () => {
 
   it('GET Normal type product', async () => {
     // Insert database data
-    await productRepository.save([
-      {
-        name: '包子',
-        type: ProductType.Normal,
-        remainingAmount: 30,
-        price: 30,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        name: '黃金開口笑',
-        type: ProductType.VIPOnly,
-        remainingAmount: 30,
-        price: 30,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        name: '饅頭',
-        type: ProductType.Normal,
-        remainingAmount: 30,
-        price: 30,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ]);
+    await ProductSeed.insertCommonProducts(productRepository);
 
     // Test api response
     return request(app.getHttpServer())
