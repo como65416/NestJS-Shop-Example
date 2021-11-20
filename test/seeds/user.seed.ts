@@ -12,6 +12,14 @@ export class UserSeed {
         role: UserRole.Member,
         email: 'bob@example.com',
       },
+      {
+        username: 'alice.accounnt',
+        password:
+          '$2a$10$cD/73CjuSWSIEftAFOKDR.e8YdyQ7Lodd0STwGHnM86RhgdI0PJMO',
+        name: 'Alice',
+        role: UserRole.VIPMember,
+        email: 'alice@example.com',
+      },
     ]);
   }
 }
