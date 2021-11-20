@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as request from 'supertest';
+import { Connection } from 'typeorm';
 import { AppModule } from '../src/app.module';
 import { ProductEntity, UserEntity } from '../src/entities';
 import { UserRepository } from '../src/repositories';
@@ -9,6 +10,7 @@ import { UserSeed } from './seeds';
 
 describe('AuthController (e2e)', () => {
   let app: INestApplication;
+  let conn: Connection;
   let userRepository: UserRepository;
 
   beforeAll(async () => {
@@ -29,13 +31,20 @@ describe('AuthController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     userRepository = moduleFixture.get(UserRepository);
+    conn = userRepository.manager.connection;
     await app.init();
   });
 
-  it('Login fail', async () => {
-    // Insert database data
-    await UserSeed.insertCommonProducts(userRepository);
+  afterAll(async () => {
+    await app.close();
+  });
 
+  beforeEach(async () => {
+    userRepository.clear();
+    await UserSeed.insertCommonProducts(userRepository);
+  });
+
+  it('Login fail', async () => {
     return request(app.getHttpServer())
       .post('/login')
       .send({
@@ -46,9 +55,6 @@ describe('AuthController (e2e)', () => {
   });
 
   it('Login success', async () => {
-    // Insert database data
-    await UserSeed.insertCommonProducts(userRepository);
-
     const resp = await request(app.getHttpServer())
       .post('/login')
       .send({

@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as request from 'supertest';
+import { Connection } from 'typeorm';
 import { AppModule } from '../src/app.module';
 import { ProductEntity, UserEntity } from '../src/entities';
 import { ProductRepository } from '../src/repositories';
@@ -9,6 +10,7 @@ import { ProductSeed } from './seeds';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  let conn: Connection;
   let productRepository: ProductRepository;
 
   beforeEach(async () => {
@@ -28,14 +30,20 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     productRepository = moduleFixture.get(ProductRepository);
+    conn = productRepository.manager.connection;
     await app.init();
   });
 
-  it('GET Normal type product', async () => {
-    // Insert database data
-    await ProductSeed.insertCommonProducts(productRepository);
+  afterAll(async () => {
+    await app.close();
+  });
 
-    // Test api response
+  beforeEach(async () => {
+    productRepository.clear();
+    await ProductSeed.insertCommonProducts(productRepository);
+  });
+
+  it('GET Normal type product', async () => {
     return request(app.getHttpServer())
       .get('/products')
       .expect(200)
