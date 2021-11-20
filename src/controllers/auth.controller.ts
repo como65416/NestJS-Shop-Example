@@ -1,14 +1,15 @@
 import {
-  Controller,
-  Response,
-  Post,
   Body,
+  Controller,
+  HttpCode,
   HttpException,
   HttpStatus,
+  Post,
+  Response
 } from '@nestjs/common';
-import { CryptService, JWTService, UsersService } from '../services';
 import { LoginRequest, RegisterRequest } from '../dtos/requests';
 import { LoginResponse } from '../dtos/response';
+import { CryptService, JWTService, UsersService } from '../services';
 
 @Controller()
 export class AuthController {
@@ -19,6 +20,7 @@ export class AuthController {
   ) {}
 
   @Post('/login')
+  @HttpCode(HttpStatus.OK)
   async login(@Body() req: LoginRequest): Promise<LoginResponse> {
     const username = req.username;
     const password = req.password;
