@@ -38,7 +38,6 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     productRepository.clear();
     userRepository.clear();
-    conn.query("DELETE FROM sqlite_sequence WHERE name = 'product'");
     await UserSeed.insertCommonProducts(userRepository);
     await ProductSeed.insertCommonProducts(productRepository);
   });
