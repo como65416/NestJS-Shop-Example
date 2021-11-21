@@ -1,9 +1,10 @@
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import { Connection } from 'typeorm';
 import { AppModule } from '../src/app.module';
+import SQLiteDatabaseConfig from '../src/configs/db.sqlite.config';
 import { ProductEntity, UserEntity } from '../src/entities';
 import { ProductRepository, UserRepository } from '../src/repositories';
 import { ProductSeed, UserSeed } from './seeds';
@@ -17,13 +18,7 @@ describe('AppController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        TypeOrmModule.forRoot({
-          type: 'sqlite',
-          database: ':memory:',
-          dropSchema: true,
-          entities: [UserEntity, ProductEntity],
-          synchronize: true,
-        }),
+        TypeOrmModule.forRoot(SQLiteDatabaseConfig as TypeOrmModuleOptions),
         TypeOrmModule.forFeature([UserEntity, ProductEntity]),
         AppModule,
       ],
