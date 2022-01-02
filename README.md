@@ -12,6 +12,7 @@
 - Custom Repository
 - Entity, DTO
 - E2E 測試 (使用 SQLite)
+- API 文件 (Swagger)
 
 ## 所需環境
 

@@ -6,10 +6,13 @@ import {
   Put,
   Response
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdatePasswordRequest, UpdateProfileRequest } from '../dtos/requests';
 import { ProfileResponse } from '../dtos/response/profile-response';
 import { CryptService, UsersService } from '../services';
 
+@ApiTags('user')
+@ApiBearerAuth()
 @Controller()
 export class UserController {
   constructor(
@@ -18,6 +21,11 @@ export class UserController {
   ) {}
 
   @Get('/profile')
+  @ApiResponse({
+    status: 200,
+    type: ProfileResponse,
+    description: 'Get user profile',
+  })
   async profile(@Response() res): Promise<ProfileResponse> {
     const userId = res.locals.userId;
     const user = await this.usersService.findById(userId);
@@ -29,6 +37,10 @@ export class UserController {
   }
 
   @Put('/profile')
+  @ApiResponse({
+    status: 201,
+    description: 'Update Success',
+  })
   async updateProfile(
     @Body() req: UpdateProfileRequest,
     @Response() res,
@@ -43,6 +55,10 @@ export class UserController {
   }
 
   @Put('/update-password')
+  @ApiResponse({
+    status: 201,
+    description: 'Update Success',
+  })
   async updatePassword(@Body() req: UpdatePasswordRequest, @Response() res) {
     const userId = res.locals.userId;
     await this.usersService.updatePassword(userId, req.password);

@@ -7,10 +7,12 @@ import {
   Post,
   Response
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { LoginRequest, RegisterRequest } from '../dtos/requests';
 import { LoginResponse } from '../dtos/response';
 import { CryptService, JWTService, UsersService } from '../services';
 
+@ApiTags('auth')
 @Controller()
 export class AuthController {
   constructor(
