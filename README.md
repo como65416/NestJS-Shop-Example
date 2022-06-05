@@ -46,3 +46,8 @@ npm run start:dev
 npm run build
 node --enable-source-maps dist/main.js
 ```
+
+### Other
+
+- [postman file](./other/postman_collection.json)
+

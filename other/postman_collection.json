@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "d509d749-edf4-411d-a483-ac69ca9358d0",
+		"name": "Shop Demo (Spring Book, NestJS)",
+		"description": "API description\n\nContact Support:\n Name: Contant name\n Email: email",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11185253"
+	},
+	"item": [
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "Search Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "筍",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search VIP Product (VIP only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoiYWxpY2UiLCJyb2xlIjoiVklQTWVtYmVyIiwiaWF0IjoxNjMzOTM1MzkxfQ.QFVB-O-NXyi_rNulQ71VE9Gy9bONF4xLY9nRqgykVKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/vip-products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"vip-products"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "包",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoiYWxpY2UiLCJyb2xlIjoiVklQTWVtYmVyIiwiaWF0IjoxNjMzOTM1MzkxfQ.QFVB-O-NXyi_rNulQ71VE9Gy9bONF4xLY9nRqgykVKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Alice\",\n    \"email\": \"alice@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user-info",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "GET Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMzLCJ1c2VybmFtZSI6ImphY2swMDAxIiwicm9sZSI6Ik1lbWJlciIsImlhdCI6MTYzNzM5ODk1N30.zsIuxLsJ-olKX-aZhaTIPqI1t9_gsVQshMjhm3I-e4Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMzLCJ1c2VybmFtZSI6ImphY2swMDAxIiwicm9sZSI6Ik1lbWJlciIsImlhdCI6MTYzNzM5ODk1N30.zsIuxLsJ-olKX-aZhaTIPqI1t9_gsVQshMjhm3I-e4Q",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user-info",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user-info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMzLCJ1c2VybmFtZSI6ImphY2swMDAxIiwicm9sZSI6Ik1lbWJlciIsImlhdCI6MTYzNDIyNjg4M30.MVyrSRMFFWfzeq4ImIFg1Fe2d6yCj8J-NncZZDo78Gg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/update-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"jack0001\",\n    \"password\": \"12345678\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"jack0001\",\n    \"password\": \"12345678\",\n    \"name\": \"Jack\",\n    \"email\": \"jack0001@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "//localhost:8080/",
+			"type": "string"
+		}
+	]
+}
