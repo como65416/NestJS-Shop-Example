@@ -9,6 +9,7 @@
 - Validation
 - JWT 驗證 (Middleware)
 - Guards (Role Check)
+- Error Handler (Filter)
 - Custom Repository
 - Entity, DTO
 - E2E 測試 (使用 SQLite)
