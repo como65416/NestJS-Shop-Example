@@ -4,7 +4,7 @@ import {
   Get,
   HttpStatus,
   Put,
-  Response
+  Response,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdatePasswordRequest, UpdateProfileRequest } from '../dtos/requests';
@@ -33,6 +33,7 @@ export class UserController {
     return res.send({
       name: user.name,
       email: user.email,
+      orderIds: user.orders.map((order) => order.id),
     } as ProfileResponse);
   }
 

@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   async findById(id: number) {
-    return await this.usersRepository.findOneById(id);
+    return await this.usersRepository.findOneWithOrdersById(id);
   }
 
   async createUser(data: CreateUserData) {

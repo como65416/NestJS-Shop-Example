@@ -11,7 +11,7 @@
 - Guards (Role Check)
 - Error Handler (Filter)
 - Custom Repository
-- Entity, DTO
+- Entity, DTO, Relation
 - E2E 測試 (使用 SQLite)
 - API 文件 (Swagger)
 

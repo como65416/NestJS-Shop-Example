@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import { UserRole } from '../enum';
+import { UserOrderEntity } from './user-order.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -36,4 +39,8 @@ export class UserEntity {
     name: 'updated_at',
   })
   updatedAt?: Date;
+
+  @OneToMany(() => UserOrderEntity, (order) => order.user)
+  @JoinColumn({ referencedColumnName: 'user_id' })
+  orders?: UserOrderEntity[];
 }

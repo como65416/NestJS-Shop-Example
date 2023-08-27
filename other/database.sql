@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.32, for osx10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for macos12.6 (arm64)
 --
 -- Host: localhost    Database: shop
 -- ------------------------------------------------------
--- Server version	5.7.32
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,27 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `shop`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `shop` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `shop`;
-
---
 -- Table structure for table `order_product`
 --
 
 DROP TABLE IF EXISTS `order_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_product` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int(10) unsigned NOT NULL,
-  `product_id` int(10) unsigned NOT NULL,
-  `amount` tinyint(3) unsigned NOT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int unsigned NOT NULL,
+  `product_id` int unsigned NOT NULL,
+  `amount` tinyint unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,15 +69,16 @@ INSERT INTO `product` VALUES (1,'菜包','Normal',20,120,'2021-09-28 23:20:20','
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` varchar(300) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -96,7 +89,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_username` (`username`),
   KEY `idx_email` (`email`(30))
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,10 +108,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_order` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `account_id` int(11) unsigned NOT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int unsigned NOT NULL,
   `phone` varchar(20) NOT NULL,
   `address` varchar(60) NOT NULL,
   `total_price` float NOT NULL,
@@ -126,7 +119,7 @@ CREATE TABLE `user_order` (
   `updated_at` datetime NOT NULL,
   `status` enum('unpaid','paid','canceled') NOT NULL DEFAULT 'unpaid',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +128,7 @@ CREATE TABLE `user_order` (
 
 LOCK TABLES `user_order` WRITE;
 /*!40000 ALTER TABLE `user_order` DISABLE KEYS */;
+INSERT INTO `user_order` VALUES (1,33,'0987654321','The. a',30,'2023-08-27 00:00:00','2023-08-27 00:00:00','unpaid'),(2,33,'0987654321','The. b',59,'2023-08-27 00:00:00','2023-08-27 00:00:00','paid');
 /*!40000 ALTER TABLE `user_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -147,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-21 22:04:24
+-- Dump completed on 2023-08-27 23:21:26

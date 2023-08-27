@@ -10,4 +10,9 @@ export class ProfileResponse {
     description: 'User Email',
   })
   email: string;
+
+  @ApiProperty({
+    description: 'User Orders',
+  })
+  orderIds: number[];
 }
