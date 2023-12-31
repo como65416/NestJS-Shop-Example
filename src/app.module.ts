@@ -5,6 +5,7 @@ import { getConnectionOptions } from 'typeorm';
 import SQLiteDatabaseConfig from './configs/db.sqlite.config';
 import { AuthController } from './controllers';
 import { CommonModule, ProductModule, UserModule } from './modules';
+import { LoggerModule } from './modules/logger.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CommonModule, ProductModule, UserModule } from './modules';
     CommonModule,
     UserModule,
     ProductModule,
+    LoggerModule,
   ],
   controllers: [AuthController],
   providers: [],

@@ -9,7 +9,8 @@ import {
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdatePasswordRequest, UpdateProfileRequest } from '../dtos/requests';
 import { ProfileResponse } from '../dtos/response/profile-response';
-import { CryptService, UsersService } from '../services';
+import { UsersService } from '../services';
+import { RequestLogger } from 'src/common/request.logger';
 
 @ApiTags('user')
 @ApiBearerAuth()
@@ -17,7 +18,7 @@ import { CryptService, UsersService } from '../services';
 export class UserController {
   constructor(
     private usersService: UsersService,
-    private cryptService: CryptService,
+    private requestLogger: RequestLogger,
   ) {}
 
   @Get('/profile')
@@ -47,6 +48,7 @@ export class UserController {
     @Response() res,
   ): Promise<any> {
     const userId = res.locals.userId;
+    this.requestLogger.log(`User ID [${userId}] start update profile (API)`);
     await this.usersService.updateUserProfile(userId, {
       name: req.name,
       email: req.email,

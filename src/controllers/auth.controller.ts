@@ -5,7 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
-  Response
+  Response,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginRequest, RegisterRequest } from '../dtos/requests';

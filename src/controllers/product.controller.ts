@@ -4,7 +4,7 @@ import {
   Get,
   Query,
   Response,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SearchProductResponse } from '../dtos/response';

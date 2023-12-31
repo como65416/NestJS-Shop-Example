@@ -14,6 +14,7 @@ Use：
 - Entity, DTO, Relation
 - E2E test (alternative by SQLite)
 - API doc (Swagger)
+- Inject request id to logger example (`@Injectable({ scope: Scope.REQUEST })`)
 
 ## Environment
 

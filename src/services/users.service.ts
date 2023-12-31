@@ -4,11 +4,13 @@ import { Connection } from 'typeorm';
 import { CreateUserData, UpdateUserData } from '../dtos/data';
 import { UserRole } from '../enum';
 import { UserRepository } from '../repositories';
+import { RequestLogger } from 'src/common/request.logger';
 
 @Injectable()
 export class UsersService {
   constructor(
     private usersRepository: UserRepository,
+    private requestLogger: RequestLogger,
     private connection: Connection,
   ) {}
 
@@ -36,13 +38,24 @@ export class UsersService {
   }
 
   async updateUserProfile(userId: number, profile: UpdateUserData) {
-    return await this.connection.transaction(async (entityManager) => {
-      const usersRepository = entityManager.getCustomRepository(UserRepository);
-      await usersRepository.updateUser(userId, {
-        name: profile.name,
-        email: profile.email,
-      });
-    });
+    this.requestLogger.log(
+      `User ID [${userId}] update profile start (Service)`,
+    );
+    const updateResult = await this.connection.transaction(
+      async (entityManager) => {
+        const usersRepository =
+          entityManager.getCustomRepository(UserRepository);
+        await usersRepository.updateUser(userId, {
+          name: profile.name,
+          email: profile.email,
+        });
+      },
+    );
+    this.requestLogger.log(
+      `User ID [${userId}] update profile finish (Service)`,
+    );
+
+    return updateResult;
   }
 
   async updatePassword(userId: number, password: string) {
