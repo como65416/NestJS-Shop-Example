@@ -2,46 +2,44 @@
   <img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" />
 </p>
 
-一個簡單的 Nest JS 範例
+a simple Nest JS project
 
-包含：
+Use：
 - RESTFul API
 - Validation
-- JWT 驗證 (Middleware)
+- JWT validation (Middleware)
 - Guards (Role Check)
 - Error Handler (Filter)
 - Custom Repository
 - Entity, DTO, Relation
-- E2E 測試 (使用 SQLite)
-- API 文件 (Swagger)
+- E2E test (alternative by SQLite)
+- API doc (Swagger)
 
-## 所需環境
+## Environment
 
-- NodeJS (測試使用為 v15.0.1)
+- NodeJS (has been tested on Node.js v15.0.1)
 
-- MySQL >= 5.6 (資料 : [database.sql](./other/database.sql))
+- MySQL >= 5.6 (Dataset : [database.sql](./other/database.sql))
 
-## 使用方法
+## Usage
 
-前置準備
+step 1. import database
 
-step 1. 匯入資料庫
+step 2. set up `ormconfig.json`
 
-step 2. 更新資料庫連線設定 `ormconfig.json`
-
-step 3. 安裝套件
+step 3. install packages
 
 ```sh
 npm ci
 ```
 
-### 開發
+### Develop
 
 ```sh
 npm run start:dev
 ```
 
-### Build 與 Run as Production
+### Build and Run as Production
 
 ```sh
 npm run build
